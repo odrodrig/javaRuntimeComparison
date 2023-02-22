@@ -1,0 +1,15 @@
+FROM registry.access.redhat.com/ubi8/ubi
+
+ENV WORKDIR=/root
+
+ENV EAP_HOME=${WORKDIR}/jboss-eap-8.0
+
+COPY jboss-eap-8.0.0.Beta.zip ${WORKDIR}
+
+RUN yum install -y java-17-openjdk.x86_64 unzip && \
+    unzip ${WORKDIR}/jboss-eap-8.0.0.Beta.zip -d ${WORKDIR} && \
+    ls
+
+COPY guide-maven-intro/finish/target/ServletSample.war ${EAP_HOME}/standalone/deployments
+
+CMD ${EAP_HOME}/bin/standalone.sh -b 0.0.0.0 -bmanagement 0.0.0.0

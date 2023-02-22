@@ -1,0 +1,3 @@
+FROM quay.io/wildfly/wildfly:27.0.1.Final-jdk19
+
+COPY guide-maven-intro/finish/target/ServletSample.war /opt/jboss/wildfly/standalone/deployments/
